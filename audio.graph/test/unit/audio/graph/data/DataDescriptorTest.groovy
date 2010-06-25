@@ -36,6 +36,8 @@ assert dn.dn[1] == 10
 		DataDescription description = new DataDescription()
 		DataDescriptor descriptor = new DataDescriptor()
 		description = descriptor.describeData(data)
+
+		
 		assert description.xmin == -2
 		assert description.ymax == 4
 		assert description.extremaX[0] == 0

@@ -8,6 +8,9 @@ class DataDescription {
 	List extremaX = []
 	List extremaY = []
 	List   extremaType = []
+String extrema = ''
 
+	
+	
 	
 }

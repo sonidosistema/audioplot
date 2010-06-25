@@ -5,7 +5,9 @@ import java.io.File;
 
 class GraphController{
 	def graphService
-	def index = {}
+	def serverFileService
+	def index = {
+	}
 	def load = {	
 		def downloadedfile = request.getFile('data');
 		assert downloadedfile
@@ -18,13 +20,21 @@ class GraphController{
 		
 		
 		[description:graph.description]
-		}
+	}
 	
-	def soundService
-	def play = {
-File f = soundService.playSound(graph)
-assert f
-return f
-			}
+	def playgraph = {
+		File sf=serverFileservice.newFile()
+		
+		File f = serverFileService.getFile(sf)
+		
+		[path : f.absolutePath]
+	}
+	
+	//def soundService
+	//def play = {
+	//File f = soundService.playSound(graph)
+	
+	
+	//}
 	
 }
