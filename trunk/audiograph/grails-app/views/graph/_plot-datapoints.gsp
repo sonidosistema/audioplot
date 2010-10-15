@@ -1,0 +1,1 @@
+<g:lineChart data="${[datapoints.x, datapoints.y]}"/>
