@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>audio.graph</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.springsource.sts.grails.core.nature</nature>
+		<nature>org.eclipse.jdt.groovy.core.groovyNature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>hibernate-1.2.1-grails-app-i18n</name>
+			<type>2</type>
+			<location>C:/Documents and Settings/srihv/.grails/1.2.1/projects/audio.graph/plugins/hibernate-1.2.1/grails-app/i18n</location>
+		</link>
+		<link>
+			<name>jquery-1.4.1.1-grails-app-conf</name>
+			<type>2</type>
+			<location>C:/Documents and Settings/srihv/.grails/1.2.1/projects/audio.graph/plugins/jquery-1.4.1.1/grails-app/conf</location>
+		</link>
+		<link>
+			<name>jquery-1.4.1.1-grails-app-services</name>
+			<type>2</type>
+			<location>C:/Documents and Settings/srihv/.grails/1.2.1/projects/audio.graph/plugins/jquery-1.4.1.1/grails-app/services</location>
+		</link>
+		<link>
+			<name>jquery-1.4.1.1-grails-app-taglib</name>
+			<type>2</type>
+			<location>C:/Documents and Settings/srihv/.grails/1.2.1/projects/audio.graph/plugins/jquery-1.4.1.1/grails-app/taglib</location>
+		</link>
+		<link>
+			<name>jquery-1.4.1.1-src-groovy</name>
+			<type>2</type>
+			<location>C:/Documents and Settings/srihv/.grails/1.2.1/projects/audio.graph/plugins/jquery-1.4.1.1/src/groovy</location>
+		</link>
+		<link>
+			<name>tomcat-1.2.1-src-groovy</name>
+			<type>2</type>
+			<location>C:/Documents and Settings/srihv/.grails/1.2.1/projects/audio.graph/plugins/tomcat-1.2.1/src/groovy</location>
+		</link>
+	</linkedResources>
+</projectDescription>
