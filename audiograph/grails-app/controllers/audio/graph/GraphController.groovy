@@ -18,26 +18,19 @@ class GraphController{
 		
 		Graph graph = graphService.createGraph(ftmp)
 		ftmp.delete()
-ServerFile sf= serverFileService.newFile()
+		ServerFile sf= serverFileService.newFile()
 		soundService.playSound(graph, serverFileService.getFile(sf))
-
-
-		[description:graph.description, datapoints: graph.datapoints, soundFile: sf]}
-
-		
-		def play = {		
-			File f = serverFileService.getFile(ServerFile.get(params.serverFileId as Long))
-			response.setContentType("audio/midi")
-			response.setContentLength(f.size() as Integer)
-			response.outputStream<< f.readBytes()
-			response.outputStream.flush()
 		
 		
-		
+		[description:graph.description, datapoints: graph.datapoints, soundFile: sf]
 	}
 	
-			
 	
-	
-	
+	def play = {		
+		File f = serverFileService.getFile(ServerFile.get(params.serverFileId as Long))
+		response.setContentType("audio/midi")
+		response.setContentLength(f.size() as Integer)
+		response.outputStream<< f.readBytes()
+		response.outputStream.flush()
+	}
 }
