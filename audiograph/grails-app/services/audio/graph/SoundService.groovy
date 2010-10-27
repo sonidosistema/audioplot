@@ -8,23 +8,22 @@ import audio.graph.sound.MelodyStreamer
 import audio.graph.sound.ValuesConverter 
 
 class SoundService {
-
-    boolean transactional = true
-
-    void playSound(Graph graph, File f) {
+	
+	boolean transactional = true
+	
+	void playSound(Graph graph, File f) {
 		DataReader normaliser = new DataReader()
 		DataPoints dataNorm = normaliser.normalisation(graph.datapoints)
 		Interpolation inter= new Interpolation()
-dataNorm = inter.interpolate(dataNorm, 100)
-
+		dataNorm = inter.interpolate(dataNorm, 100)
+		
 		ValuesConverter converter = new ValuesConverter()
 		converter.convertToTone(dataNorm.y)
 		converter.addLength(dataNorm.x)
 		converter.tones2string()
-				String pattern =converter.getPattern()
-				
-						MelodyStreamer streamer = [:]
-		streamer.streamIt("Flute", pattern, null)
-			
-    }
+		String pattern =converter.getPattern()
+		
+		MelodyStreamer streamer = [:]
+		streamer.streamIt("Flute", pattern, f)
+	}
 }
