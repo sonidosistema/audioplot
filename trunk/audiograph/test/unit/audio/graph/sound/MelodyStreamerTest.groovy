@@ -16,7 +16,7 @@ import org.jfugue.Player
  */
 class MelodyStreamerTest extends GroovyTestCase {
 	
-	boolean isLive=true
+	boolean isLive=false
 	
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -58,8 +58,9 @@ class MelodyStreamerTest extends GroovyTestCase {
 			return null
 		
 		File soundFile= File.createTempFile('melo-stream.', '.wav')
-		soundFile.deleteOnExit()
-		return soundFile.absolutePath
+		//soundFile.deleteOnExit()
+		println soundFile.absolutePath
+		return soundFile
 		
 	}
 	

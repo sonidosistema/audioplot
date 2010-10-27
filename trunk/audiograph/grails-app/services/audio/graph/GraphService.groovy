@@ -7,6 +7,7 @@ import audio.graph.data.DataReader
 import audio.graph.data.Graph 
 
 class GraphService {
+	DataReader reader = new DataReader()
 	
 	boolean transactional = true
 	/**
@@ -14,14 +15,14 @@ class GraphService {
 	 */
 	public Graph    createGraph(File f) {
 		Graph graph = new Graph()
-		DataPoints data = new DataPoints()
-		DataReader reader = new DataReader()
-		data = reader.readData(f)
-		graph.datapoints = data
+
+		graph.datapoints = reader.readData(f)
+		f.delete()
 		DataDescription description = new DataDescription()
 		DataDescriptor descriptor = new DataDescriptor()
-		description = descriptor.describeData(data)
+		description = descriptor.describeData(graph.datapoints)
 		graph.description = description
+		
 		return graph
 		
 	}
