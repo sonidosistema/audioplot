@@ -19,7 +19,6 @@ class ServerFileService {
 	
 	ServerFile newFile() {
 		return new ServerFile().save()
-		
 	}
 	
 	File getFile(ServerFile sf){

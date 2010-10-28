@@ -12,13 +12,35 @@ class DataReader {
 	 * returns a DataPoints object with the data
 	 */
 	public DataPoints readData(File f){
-		DataPoints datapoints = new DataPoints()		
-		f.eachLine{
-			List l = it.split('\t')
+		DataPoints datapoints = new DataPoints()
+				
+		boolean firstLine=true
+		f.eachLine{String line ->
+			if(line.startsWith('#')){
+				datapoints.comments+=line+"\n"
+				return
+			}
+			
+			if(firstLine && (line =~ /[a-zA-Z]/) ){
+				List headers=extractHeader (line)
+				datapoints.nameX=headers[0]
+				datapoints.nameY=headers[1]
+				firstLine=false;
+				return
+			}
+			firstLine = false
+			List l = line.split('\t')
 			datapoints.x<<l[0].toDouble()
 			datapoints.y<<l[1].toDouble()
 		}
 		return datapoints
+	}
+
+	List extractHeader(String line){
+		if(line.contains('\t')){
+			return line.split(/\t/)
+		}
+		return line.split(/\s+/)
 	}
 	
 	/**

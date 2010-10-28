@@ -17,11 +17,11 @@
 			
 			<g:if test="${params.action == 'load' }">
 				<div id="div_load">
-					<g:render template="show-description" model="${[description:description]}"/>
+					<g:render template="show-description" bean="${graph}" var="graph"/>
     
 					<g:render template="play-file" bean="soundFile" />
 
-					<g:render template="plot-datapoints" />			
+					<g:render template="plot-datapoints"  bean="${graph}" var="graph"/>			
 				</div>
                 <g:render template="file-description" bean="${fileDescription }"/>
 			</g:if>

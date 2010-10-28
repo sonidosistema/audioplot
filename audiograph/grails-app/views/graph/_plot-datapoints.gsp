@@ -1,3 +1,3 @@
 <div style="position: relative;">
-    <g:lineChart data="${[datapoints.x, datapoints.y]}"/>
+    <g:lineChart data="${[graph.datapoints.x, graph.datapoints.y]}"/>
 </div>

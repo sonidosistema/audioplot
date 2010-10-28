@@ -48,10 +48,5 @@
 			<type>2</type>
 			<location>/Users/alex/.grails/1.3.5/projects/audio.graph/plugins/jquery-1.4.3.2/src/groovy</location>
 		</link>
-		<link>
-			<name>tomcat-1.3.5-src-groovy</name>
-			<type>2</type>
-			<location>/Users/alex/.grails/1.3.5/projects/audio.graph/plugins/tomcat-1.3.5/src/groovy</location>
-		</link>
 	</linkedResources>
 </projectDescription>

@@ -11,7 +11,7 @@ class SoundService {
 	
 	boolean transactional = true
 	
-	void playSound(Graph graph, File f) {
+	void playSound(Graph graph, File f, String instrument='Flute') {
 		DataReader normaliser = new DataReader()
 		DataPoints dataNorm = normaliser.normalisation(graph.datapoints)
 		Interpolation inter= new Interpolation()
@@ -24,6 +24,6 @@ class SoundService {
 		String pattern =converter.getPattern()
 		
 		MelodyStreamer streamer = [:]
-		streamer.streamIt("Flute", pattern, f)
+		streamer.streamIt(instrument, pattern, f)
 	}
 }
