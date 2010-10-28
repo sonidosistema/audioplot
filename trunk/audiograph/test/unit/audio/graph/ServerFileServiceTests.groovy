@@ -12,6 +12,8 @@ class ServerFileServiceTests extends GrailsUnitTestCase {
 	}
 	
 	void test_new() {
+		mockDomain(ServerFile)
+		mockLogging(ServerFileService)
 		def service =new ServerFileService()
 		ServerFile sf=service.newFile()
 		assert sf

@@ -23,12 +23,11 @@ class GraphController{
 		
 		Graph graph = graphService.createGraph(ftmp)
 		ServerFile sf= serverFileService.newFile()
-		soundService.playSound(graph, serverFileService.getFile(sf))
+		soundService.playSound(graph, serverFileService.getFile(sf), params.instrument)
 		
 		render (view:'index', model:[
 			fileDescription:fileDescr,
-			description:graph.description,
-			datapoints: graph.datapoints,
+			graph:graph,
 			soundFile: sf,
 			]
 		)
