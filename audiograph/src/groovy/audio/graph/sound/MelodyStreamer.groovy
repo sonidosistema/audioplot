@@ -1,6 +1,5 @@
 package audio.graph.sound
 
-
 import gervill.demo.Midi2WavRender;
 
 import javax.sound.midi.MidiSystem;
