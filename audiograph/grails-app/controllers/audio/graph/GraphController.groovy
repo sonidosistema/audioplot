@@ -14,21 +14,41 @@ class GraphController{
 	}
 	
 	def load = {	
+		def fileDescr = getFileDescr(params.data)
+		if(!fileDescr.size){
+			flash.message="no or empty uploaded file"
+			render (view:'index')
+			return
+		}
+		
+		
 		def downloadedfile = request.getFile("data");
-		assert downloadedfile
 		File ftmp = File.createTempFile("data", ".txt")
 		downloadedfile.transferTo(ftmp)
 		
-		def fileDescr = getFileDescr(params.data)
 		
 		Graph graph = graphService.createGraph(ftmp)
 		ServerFile sf= serverFileService.newFile()
-		soundService.playSound(graph, serverFileService.getFile(sf), params.instrument)
+		soundService.playSound(graph, serverFileService.getFile(sf))
+		
+		//test instruments only
+		def instrumentSounds=[:]
+		SoundService.availableInstruments.each{inst ->
+			ServerFile sfTmp= serverFileService.newFile()
+			soundService.playSound(graph, serverFileService.getFile(sfTmp), inst)
+			instrumentSounds[inst]=[
+					playText:"play $inst",
+					soundFile:sfTmp,
+				]
+		}
 		
 		render (view:'index', model:[
+			loadedOk:true,
 			fileDescription:fileDescr,
 			graph:graph,
 			soundFile: sf,
+			//debug
+			instrumentSounds:instrumentSounds
 			]
 		)
 	}

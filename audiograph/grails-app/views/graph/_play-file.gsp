@@ -1,21 +1,19 @@
-<g:setProvider library="jquery" />
-
-
+<g:set var="soundId" value="${toplay.soundFile.id }"/>
 <table>
     <tr>
         <td>
-		  <g:submitButton name="play" id="play-sound">play</g:submitButton>
+		  <g:submitButton name="${toplay.playText?:'play'}" id="play-sound-${soundId}"/>
 	  </td>
 	  <td>
-		<a class="media" href="${createLink(action:'play', id:soundFile.id+'.wav')}"></a>
+		<a id="media-${soundId}" href="${createLink(action:'play', id:soundId+'.wav')}"></a>
 		</td>
 	</tr>
 </table>
 
 <jq:jquery>
-	$('.media').media({height:20, width:200, autoplay:false, params:{name:'mySound'}});
-	$('#play-sound').click(function(){
-		document.mySound.Play();
+	$('#media-${soundId}').media({height:20, width:200, autoplay:false, params:{name:'mySound-${soundId}'}});
+	$('#play-sound-${soundId}').click(function(){
+	   console.log(document['mySound-${soundId}'])
+		$('embed[name="mySound-${soundId}"]')[0].Play();
 	});
 </jq:jquery>
-

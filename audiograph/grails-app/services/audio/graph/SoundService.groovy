@@ -8,10 +8,23 @@ import audio.graph.sound.MelodyStreamer
 import audio.graph.sound.ValuesConverter 
 
 class SoundService {
+	static List availableInstruments = [
+		'CHURCH_ORGAN',
+		'HARMONICA',
+		'VIOLIN',
+		'CONTRABASS',
+		'TRUMPET',
+		'TUBA',
+		'SOPRANO_SAX',
+		'CLARINET',
+		'FLUTE',
+		'WHISTLE',
+		'PAN_FLUTE',
+		]
 	
 	boolean transactional = true
 	
-	void playSound(Graph graph, File f, String instrument='Flute') {
+	void playSound(Graph graph, File f, String instrument='flute') {
 		DataReader normaliser = new DataReader()
 		DataPoints dataNorm = normaliser.normalisation(graph.datapoints)
 		Interpolation inter= new Interpolation()

@@ -6,6 +6,11 @@
 		
 		</head>
 		<body>
+	       <g:if test="${flash.message }">
+	           <div class="errors">
+	               ${flash.message }
+	           </div>
+	       </g:if>
 	
 			<g:form name="loadForm" url="[controller:'graph',action:'load']"
 				update="div_load" method="post" enctype="multipart/form-data">
@@ -15,20 +20,28 @@
 				
 			</g:form>
 			
-			<g:if test="${params.action == 'load' }">
+			<g:if test="${loadedOk }">
 				<div id="div_load">
-					<g:render template="show-description" bean="${graph}" var="graph"/>
+					<tmpl:show-description graph="${graph}" />
     
-					<g:render template="play-file" bean="soundFile" />
+                    <tmpl:play-file toplay="${[soundFile:soundFile]}"/>
 
-					<g:render template="plot-datapoints"  bean="${graph}" var="graph"/>			
-				</div>
-                <g:render template="file-description" bean="${fileDescription }"/>
+                    <tmpl:plot-datapoints graph="${graph}" />
+
+					<g:each in="${instrumentSounds.values() }">
+	                    <tmpl:play-file toplay="${it}"/>
+					</g:each>
+	                <g:render template="file-description" bean="${fileDescription }"/>
+                </div>
+                
 			</g:if>
 	
 <jq:jquery>
     $('#input-data-file').change(function(){
         $('#submit-load-file').focus();
+    });
+    $('#submit-load-file').click(function(){
+        $('#div_load').empty();
     });
 </jq:jquery>
 		</body>
