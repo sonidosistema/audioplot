@@ -1,4 +1,4 @@
-//google.appengine.sdk='/Users/alex/local/appengine-java-sdk-1.3.8'
+google.appengine.sdk='/Users/alex/local/appengine-java-sdk-1.3.8'
 
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
