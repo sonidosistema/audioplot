@@ -1,5 +1,12 @@
 #summary a short introduction help
 
+= What is reported out of my datapoints? =
+Data are uploaded from a file (see below), and transformed into a melody.
+Beside the melody, a few informations are computed
+  * values ranges (minimum and maximum for x and y
+  * local extrema
+  * a graphical plot
+
 = What kind of data file can I upload? =
 
 Basically, a data file contains 2 rows of numbers x/y, separated by spaces or tab characters, _e.g._
