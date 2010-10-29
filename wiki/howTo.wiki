@@ -9,12 +9,10 @@ Basically, a data file contains 2 rows of numbers x/y, separated by spaces or ta
 1	0.999200106660978
 2	0.996801706302619
 3	0.992808635853866
-4	0.987227283375627
-5	0.980066577841242
-6	0.97133797485203
+...
 }}}
 
-== Can I add header line to name the column ==
+== Can I add header line to name the columns? ==
 
 By default, the two columns are named _x_ and _y_, but if the first line is a text, then it will be parsed and considered as column names, _e.g_
 {{{
@@ -23,8 +21,8 @@ time height
 1	0.999200106660978
 2	0.996801706302619
 3	0.992808635853866
-4	0.987227283375627
-5	0.980066577841242
-6	0.97133797485203
+...
 }}}
 
+== Can I add comments? ==
+Yep! all lines starting with a _#_ character will be considered as a comment. Comment line will be extracted and reported on the analysis page.
