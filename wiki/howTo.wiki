@@ -7,7 +7,8 @@ Beside the melody, a few informations are computed
   * local extrema
   * a graphical plot
 
-= What kind of data file can I upload? =
+= Data =
+== What kind of data file can I upload? ==
 
 Basically, a data file contains 2 rows of numbers x/y, separated by spaces or tab characters, _e.g._
 
@@ -41,3 +42,6 @@ time height
 2	0.996801706302619
 3	0.992808635853866
 }}}
+
+== I'd like to see it working but do not have any data available ==
+No problem, check the example gallery
