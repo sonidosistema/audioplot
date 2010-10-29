@@ -1,0 +1,30 @@
+#summary a short introduction help
+
+= What kind of data file can I upload? =
+
+Basically, a data file contains 2 rows of numbers x/y, separated by spaces or tab characters, _e.g._
+
+{{{
+0	1
+1	0.999200106660978
+2	0.996801706302619
+3	0.992808635853866
+4	0.987227283375627
+5	0.980066577841242
+6	0.97133797485203
+}}}
+
+== Can I add header line to name the column ==
+
+By default, the two columns are named _x_ and _y_, but if the first line is a text, then it will be parsed and considered as column names, _e.g_
+{{{
+time height
+0	1
+1	0.999200106660978
+2	0.996801706302619
+3	0.992808635853866
+4	0.987227283375627
+5	0.980066577841242
+6	0.97133797485203
+}}}
+
