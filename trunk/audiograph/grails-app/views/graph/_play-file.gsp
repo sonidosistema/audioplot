@@ -11,7 +11,7 @@
 </table>
 
 <jq:jquery>
-	$('#media-${soundId}').media({height:20, width:200, autoplay:false, params:{name:'mySound-${soundId}'}});
+	$('#media-${soundId}').media({height:20, width:200, autoplay:true, params:{name:'mySound-${soundId}'}});
 	$('#play-sound-${soundId}').click(function(){
 	   console.log(document['mySound-${soundId}'])
 		$('embed[name="mySound-${soundId}"]')[0].Play();

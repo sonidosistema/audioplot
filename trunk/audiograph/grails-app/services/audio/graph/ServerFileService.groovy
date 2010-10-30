@@ -1,28 +1,21 @@
 package audio.graph
 
-import java.io.File;
-
-// creates a new file where sound will be saved
+import com.google.appengine.api.datastore.Blob;
 
 class ServerFileService {
-	static long idCounter=1
-	def fileDirectory
+	static final Map blobStore=[:]
+	
 	boolean transactional = true
 	
-	ServerFileService(){
-		File ftmp=File.createTempFile ('data-dir', '')
-		ftmp.delete()
-		ftmp.mkdir()
-		ftmp.deleteOnExit()
-		fileDirectory=ftmp.absolutePath
+	def storeBlob(ServerFile sf, Blob blob){
+		blobStore[sf.id]=blob
+	}
+	Blob getBlob(ServerFile sf){
+		blobStore[sf.id]
 	}
 	
-	ServerFile newFile() {
-		return new ServerFile().save()
-	}
-	
-	File getFile(ServerFile sf){
-		log.debug "sf = $sf"
-		return new File("$fileDirectory/file-$sf.id")
+	def delete(ServerFile sf){
+		blobStore.remove sf.id
+		sf.delete()
 	}
 }

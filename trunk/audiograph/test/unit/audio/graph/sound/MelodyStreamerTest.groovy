@@ -46,7 +46,7 @@ class MelodyStreamerTest extends GroovyTestCase {
 		Pattern pattern = microtone.getPattern("<B1>q <B2>q <B3>q <B4>q");
 		
 		MelodyStreamer streamer = [:]
-		streamer.streamIt("Flute", pattern, null)                           
+		streamer.streamIt("Flute", pattern.getMusicString())                           
 	}
 	
 	/**

@@ -33,6 +33,6 @@ class ValuesConverterTest extends GroovyTestCase {
 		String p = c.getPattern()
 		assert p		
 		MelodyStreamer streamer = [:]
-		streamer.streamIt("Flute", p, null)
+		streamer.streamIt("Flute", p)
 	}
 }
