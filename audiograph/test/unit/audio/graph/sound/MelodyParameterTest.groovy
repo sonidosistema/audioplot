@@ -30,7 +30,7 @@ class MelodyParameterTest extends GroovyTestCase {
 			buffer<<" "+builder.buildTone(it/n)	
 		}
 		MelodyStreamer streamer = [:]
-		streamer.streamIt("Flute", builder.string2pattern(buffer.toString()), null)
+		streamer.streamIt("Flute", builder.string2pattern(buffer.toString()).getMusicString())
 	}	
 	
 	public void test_size(){
@@ -42,7 +42,7 @@ class MelodyParameterTest extends GroovyTestCase {
 			buffer<<" "+builder.buildTone(0.5+(it%2)*prec)
 		}
 		MelodyStreamer streamer = [:]
-		streamer.streamIt("Flute", builder.string2pattern(buffer.toString()), null)
+		streamer.streamIt("Flute", builder.string2pattern(buffer.toString()).getMusicString())
 	}	
 	
 	public void test_say(){
@@ -101,7 +101,7 @@ class MelodyParameterTest extends GroovyTestCase {
 			buffer<<" "+builder.buildTone(it)
 		}
 		MelodyStreamer streamer = [tempo:500]
-		streamer.streamIt("Flute", builder.string2pattern(buffer.toString()), null)		
+		streamer.streamIt("Flute", builder.string2pattern(buffer.toString()).getMusicString())		
 	}
 	
 	private void say(String str){

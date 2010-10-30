@@ -13,11 +13,10 @@ class GraphService {
 	/**
 	 * reads a datapoints file and returns a graph object with datapoints and description
 	 */
-	public Graph    createGraph(File f) {
+	public Graph createGraph(InputStream input) {
 		Graph graph = new Graph()
 
-		graph.datapoints = reader.readData(f)
-		f.delete()
+		graph.datapoints = reader.readData(input)
 		DataDescription description = new DataDescription()
 		DataDescriptor descriptor = new DataDescriptor()
 		description = descriptor.describeData(graph.datapoints)

@@ -1,4 +1,6 @@
 package audio.graph
+import java.io.FileInputStream;
+
 import audio.graph.data.DataPoints 
 import audio.graph.data.Graph 
 
@@ -19,7 +21,7 @@ class GraphServiceTests extends GrailsUnitTestCase {
 		GraphService graphservice = new GraphService()
 		Graph graph = new Graph()
 		
-		graph = graphservice.createGraph(new File("test/data/data_x2.txt"))
+		graph = graphservice.createGraph(new FileInputStream("test/data/data_x2.txt"))
 		assert graph.datapoints.x.size() == 21
 		assert graph.description.xmin == -10 
 		assert graph.description.extrema[0].x == 0

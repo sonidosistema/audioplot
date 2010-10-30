@@ -10,9 +10,10 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
-//google.appengine.application='audio.graph'
+google.appengine.application='audioplot'
 
 grails.views.javascript.library="jquery"
+grails.gorm.failOnError=true
 
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
@@ -84,6 +85,7 @@ log4j = {
            'net.sf.ehcache.hibernate'
 
     warn   'org.mortbay.log'
+	info grails.app.controller.audio.graph
 	
 	//debug 'audio.graph'
 }

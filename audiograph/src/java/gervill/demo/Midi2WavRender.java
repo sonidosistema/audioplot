@@ -28,11 +28,11 @@ package gervill.demo;
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.OutputStream;
 
 import javax.sound.midi.MetaMessage;
 import javax.sound.midi.MidiDevice;
+import javax.sound.midi.MidiDevice.Info;
 import javax.sound.midi.MidiEvent;
 import javax.sound.midi.MidiMessage;
 import javax.sound.midi.MidiSystem;
@@ -42,7 +42,6 @@ import javax.sound.midi.Sequence;
 import javax.sound.midi.Soundbank;
 import javax.sound.midi.Synthesizer;
 import javax.sound.midi.Track;
-import javax.sound.midi.MidiDevice.Info;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -51,37 +50,10 @@ import com.sun.media.sound.AudioSynthesizer;
 
 public class Midi2WavRender {
 
-	public static void main(String[] args) {
-		if (args.length >= 2)
-			try {
-				File midi_file = new File(args[0]);
-				if (!midi_file.exists())
-					throw new FileNotFoundException();
-				Sequence sequence = MidiSystem.getSequence(midi_file);
-				Soundbank soundbank = null;
-				if (args.length >= 3) {
-					File soundbank_file = new File(args[2]);
-					if (soundbank_file.exists())
-						soundbank = MidiSystem.getSoundbank(soundbank_file);
-				}
-				render(soundbank, sequence, new File(args[1]));
-				System.exit(0);
-
-			} catch (Exception e) {
-				System.out.println(e.toString());
-				System.out.println();
-			}
-		System.out.println("MIDI to WAVE Render: usages:");
-		System.out
-				.println("java Midi2WavRender <midi_file_in> <wave_file_out> <soundbank_file>");
-		System.exit(1);
-	}
-
 	/*
 	 * Render sequence using selected or default soundbank into wave audio file.
 	 */
-	public static void render(Soundbank soundbank, Sequence sequence,
-			File audio_file) {
+	public static void render(Soundbank soundbank, Sequence sequence, OutputStream out) {
 		try {
 			// Find available AudioSynthesizer.
 			AudioSynthesizer synth = findAudioSynthesizer();
@@ -108,8 +80,8 @@ public class Midi2WavRender {
 			long len = (long) (stream.getFormat().getFrameRate() * (total + 4));
 			stream = new AudioInputStream(stream, stream.getFormat(), len);
 
-			// Write WAVE file to disk.
-			AudioSystem.write(stream, AudioFileFormat.Type.WAVE, audio_file);
+			// Write WAVE file to stream.
+			AudioSystem.write(stream, AudioFileFormat.Type.WAVE, out);
 
 			// We are finished, close synthesizer.
 			synth.close();

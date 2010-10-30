@@ -1,56 +1,76 @@
 package audio.graph
 
 import audio.graph.data.Graph 
+
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+
 class GraphController{
 	GraphService graphService
-	ServerFileService serverFileService
 	SoundService soundService
+	ServerFileService serverFileService
+	
+	String demoDirectory='data/demo'
 	
 	def index = {
 	}
 	
 	def load = {	
-		def fileDescr = getFileDescr(params.data)
+		Map fileDescr = getFileDescr(params.data)
 		if(!fileDescr.size){
 			flash.message="no or empty uploaded file"
 			render (view:'index')
 			return
 		}
 		
-		
-		def downloadedfile = request.getFile("data");
-		File ftmp = File.createTempFile("data", ".txt")
-		downloadedfile.transferTo(ftmp)
-		
-		
-		Graph graph = graphService.createGraph(ftmp)
-		ServerFile sf= serverFileService.newFile()
-		soundService.playSound(graph, serverFileService.getFile(sf))
-		
-		//test instruments only
-		def instrumentSounds=[:]
-		SoundService.availableInstruments.each{inst ->
-			ServerFile sfTmp= serverFileService.newFile()
-			soundService.playSound(graph, serverFileService.getFile(sfTmp), inst)
-			instrumentSounds[inst]=[
-					playText:"play $inst",
-					soundFile:sfTmp,
-				]
-		}
+		buildSound (params.data.getBytes(), fileDescr)
+	}
+	
+	def demo = {
+		File f=getDemoFile(params.name)
+		buildSound (f, [filename:f.name, size:f.size()]);
+	}
+	
+	def buildSound(byte[] bytes, Map fileDescr){
+		buildSound(new ByteArrayInputStream(bytes), fileDescr)
+	}
+	
+	def buildSound(File dataFile, Map fileDescr){
+		buildSound(new FileInputStream(dataFile), fileDescr)
+	}
+	
+	def buildSound(InputStream input, Map fileDescr){
+		Graph graph = graphService.createGraph(input)
+		ServerFile sf = soundService.playSound(graph)
 		
 		render (view:'index', model:[
 			loadedOk:true,
 			fileDescription:fileDescr,
 			graph:graph,
 			soundFile: sf,
-			//debug
-			instrumentSounds:instrumentSounds
 			]
 		)
+	}
+	
+	/**
+	 * action to build the select widget
+	 */
+	def demoWidget={
+		List names= new File(demoDirectory).list().toList()*.replaceAll (/\.txt/, "")
+		[names:names]
+	}
+	
+	/**
+	 * return the File from the demo directory, based on the passed name
+	 * @param name
+	 * @return
+	 */
+	File getDemoFile(String name){
+		return new File("$demoDirectory/${name}.txt")
 	}
 	
 	/**
@@ -71,10 +91,11 @@ class GraphController{
 	 */
 	def play = {
 		def sid=(params.id.replaceAll('.wav', '')) as Long
-		File f = serverFileService.getFile(ServerFile.get(sid))
+		
+		byte[] bytes = serverFileService.getBlob(ServerFile.get(sid)).bytes
 		response.setContentType("audio/wav")
-		response.setContentLength(f.size() as Integer)
-		response.outputStream << f.readBytes()
+		response.setContentLength(bytes.size() as Integer)
+		response.outputStream << bytes
 		response.outputStream.flush()
 		return 
 	}

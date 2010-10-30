@@ -1,5 +1,8 @@
 package audio.graph.data;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 /**
  * this class read the a text file
  * create a DataPoints object with the data
@@ -12,10 +15,17 @@ class DataReader {
 	 * returns a DataPoints object with the data
 	 */
 	public DataPoints readData(File f){
+		readData(new FileInputStream(f))
+	}
+	/**
+	 * reads a text form a {@link InputStream}
+	 * returns a DataPoints object with the data
+	 */
+	public DataPoints readData(InputStream input){
 		DataPoints datapoints = new DataPoints()
 				
 		boolean firstLine=true
-		f.eachLine{String line ->
+		input.eachLine{String line ->
 			if(line.startsWith('#')){
 				datapoints.comments+=line+"\n"
 				return
@@ -29,7 +39,7 @@ class DataReader {
 				return
 			}
 			firstLine = false
-			List l = line.split('\t')
+			List l = line.split(/\s+/)
 			datapoints.x<<l[0].toDouble()
 			datapoints.y<<l[1].toDouble()
 		}
