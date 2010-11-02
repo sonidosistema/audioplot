@@ -1,21 +1,39 @@
 package audio.graph
 
-import com.google.appengine.api.datastore.Blob;
+import java.io.File;
 
 class ServerFileService {
-	static final Map blobStore=[:]
+	File tempDir
 	
 	boolean transactional = true
 	
-	def storeBlob(ServerFile sf, Blob blob){
-		blobStore[sf.id]=blob
+	File getTempDir(){
+		if(tempDir==null){
+			tempDir=File.createTempFile ("server-file-service-", "")
+			tempDir.delete()
+			tempDir.mkdir()
+			tempDir.deleteOnExit()
+		}
+		tempDir
 	}
-	Blob getBlob(ServerFile sf){
-		blobStore[sf.id]
+	
+	private File localFile(ServerFile sf){
+		return new File(getTempDir().absolutePath+"/sf-$sf.id")
+	}
+	
+	def storeData(ServerFile sf, byte[] bytes){
+		File f = localFile(sf)
+		f<<bytes
+	}
+	
+	
+	byte[] loadData (ServerFile sf){
+		File f = localFile(sf)
+		f.bytes
 	}
 	
 	def delete(ServerFile sf){
-		blobStore.remove sf.id
+		localFile(sf).delete()
 		sf.delete()
 	}
 }
