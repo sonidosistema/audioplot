@@ -14,7 +14,7 @@ class GraphController{
 	SoundService soundService
 	ServerFileService serverFileService
 	
-	String demoDirectory='data/demo'
+	String demoDirectory='web-app/data/demo'
 	
 	def index = {
 	}
@@ -92,7 +92,7 @@ class GraphController{
 	def play = {
 		def sid=(params.id.replaceAll('.wav', '')) as Long
 		
-		byte[] bytes = serverFileService.getBlob(ServerFile.get(sid)).bytes
+		byte[] bytes = serverFileService.loadData(ServerFile.get(sid))
 		response.setContentType("audio/wav")
 		response.setContentLength(bytes.size() as Integer)
 		response.outputStream << bytes

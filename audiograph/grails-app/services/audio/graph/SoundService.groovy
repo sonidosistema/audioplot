@@ -2,8 +2,6 @@ package audio.graph
 
 import java.io.ByteArrayOutputStream;
 
-import com.google.appengine.api.datastore.Blob;
-
 import audio.graph.data.DataPoints 
 import audio.graph.data.DataReader 
 import audio.graph.data.Graph 
@@ -47,7 +45,7 @@ class SoundService {
 		streamer.streamIt(instrument, pattern, out)
 
 		ServerFile sf = newServerFile()
-		serverFileService.storeBlob(sf, new Blob(out.toByteArray()))
+		serverFileService.storeData(sf, out.toByteArray())
 		sf
 	}
 	
