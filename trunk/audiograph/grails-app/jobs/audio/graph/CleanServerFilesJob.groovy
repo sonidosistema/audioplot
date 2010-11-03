@@ -4,7 +4,10 @@ package audio.graph
 class CleanServerFilesJob {
 	ServerFileService serverFileService
 	
-	def timeout = 1*3600*0000 // execute job once in 1 hours
+	static triggers = {
+        simple name:'simpleTrigger', startDelay:10000, repeatInterval: 1*3600*1000, repeatCount: -1
+
+	}
 	
 	def execute() {
 		use( [
@@ -18,10 +21,7 @@ class CleanServerFilesJob {
 				return
 			} 
 			log.info "deleting ${files.size()} old ServerFiles"
-			files.each{sf ->
-				serverFileService.delete sf
-			}
-			render "old ServerFile removed"
+			files.each{sf -> serverFileService.delete sf }
 		}
 	}
 }
